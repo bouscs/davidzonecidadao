@@ -32,11 +32,11 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(56),
+        preferredSize: const Size.fromHeight(56),
         child: AppBar(
           flexibleSpace: Container(
-            alignment: Alignment(0.0,1.0),
-            decoration: BoxDecoration(
+            alignment: const Alignment(0.0,1.0),
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/pngappbar.png'),
                 fit: BoxFit.fitWidth,
@@ -45,13 +45,26 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           centerTitle: true,
-          title: const Text(
-            'Davidzone',
-            style: TextStyle(
-              color: Color(0xFFECECEA),
-              fontFamily: "RobotoMedium",
-              fontSize: 22,
-            ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                'David',
+                style: TextStyle(
+                  color: Color(0xFFECECEA),
+                  fontFamily: "RobotoMedium",
+                  fontSize: 22,
+                ),
+              ),
+              Text(
+                'zone',
+                style: TextStyle(
+                  color: Color(0xFF67DFDD),
+                  fontFamily: "RobotoMedium",
+                  fontSize: 22,
+                ),
+              ),
+            ],
           ),
           backgroundColor: const Color(0xFF505050),
         ),
@@ -83,7 +96,7 @@ class CustomButton extends StatelessWidget {
         height: 47,
         decoration: BoxDecoration(
           color: Color(0xFF505050),
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(30),
             ),
             boxShadow: [
@@ -91,7 +104,7 @@ class CustomButton extends StatelessWidget {
                 color: Colors.black.withOpacity(0.25),
                 spreadRadius: 1,
                 blurRadius: 10,
-                offset: Offset(0, 4),
+                offset: const Offset(0, 4),
               )
             ],
             ),
@@ -147,8 +160,9 @@ class upperContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height/3.1,
-      alignment: Alignment.center,
+      //height: MediaQuery.of(context).size.height/2.5,
+      //alignment: Alignment.topCenter,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -156,32 +170,38 @@ class upperContainer extends StatelessWidget {
             color: Colors.black.withOpacity(0.25),
             blurRadius: 10,
             spreadRadius: 2,
-            offset: Offset(0,4),
+            offset: const Offset(0,4),
           )]
       ),
-
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
+        padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+        child: Wrap(
+          direction: Axis.vertical,
+          runAlignment: WrapAlignment.center,
+          //alignment: WrapAlignment.spaceBetween,
+          spacing: 20,
+          children: <Widget>[
             Container(
-              alignment: Alignment.center,
-              height: MediaQuery.of(context).size.height/16,
+              width: MediaQuery.of(context).size.width,
               child: const Text(
                 'Status do Veiculo',
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: "RobotoRegular",
+                  fontFamily: "RobotoMedium",
                   fontSize: 16,
                   color: Color(0xFF505050),
                 ),
               ),
             ),
-            SvgPicture.asset('assets/car_art.svg'),
             Container(
-              alignment: Alignment.center,
-              height: MediaQuery.of(context).size.height/14,
+                width: MediaQuery.of(context).size.width,
+                child: SvgPicture.asset('assets/car_art.svg')
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
               child: const Text(
                 'Você não está estacionado',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontFamily: "RobotoMedium",
                     fontSize: 22,
