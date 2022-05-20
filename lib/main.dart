@@ -1,3 +1,6 @@
+import 'package:davidzonecidadao/screens/ComprarTicket.dart';
+import 'package:davidzonecidadao/screens/MapaMunicipal.dart';
+import 'package:davidzonecidadao/screens/RegularizarVeiculo.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -33,46 +36,16 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56),
-        child: AppBar(
-          flexibleSpace: Container(
-            alignment: const Alignment(0.0,1.0),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/pngappbar.png'),
-                fit: BoxFit.fitWidth,
-                alignment: Alignment(0.0,1.0)
-              ),
-            ),
-          ),
-          centerTitle: true,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                'David',
-                style: TextStyle(
-                  color: Color(0xFFECECEA),
-                  fontFamily: "RobotoMedium",
-                  fontSize: 22,
-                ),
-              ),
-              Text(
-                'zone',
-                style: TextStyle(
-                  color: Color(0xFF67DFDD),
-                  fontFamily: "RobotoMedium",
-                  fontSize: 22,
-                ),
-              ),
-            ],
-          ),
-          backgroundColor: const Color(0xFF505050),
-        ),
+        child: CustomAppBar(),
       ),
       body: Stack(
         children: [
           MarbleBackground(),
-          upperContainer(),
+          upperContainer(
+            uppertext: 'Status do Veiculo',
+            image: SvgPicture.asset('assets/car_art.svg'),
+            bottomtext: 'Você não está estacionado',
+          ),
           bottomContainer(),
         ],
       )
@@ -80,11 +53,52 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+class CustomAppBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      flexibleSpace: Container(
+        alignment: const Alignment(0.0,1.0),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/pngappbar.png'),
+              fit: BoxFit.fitWidth,
+              alignment: Alignment(0.0,1.0)
+          ),
+        ),
+      ),
+      centerTitle: true,
+      title: Wrap(
+        children: const [
+          Text(
+            'David',
+            style: TextStyle(
+              color: Color(0xFFECECEA),
+              fontFamily: "RobotoMedium",
+              fontSize: 22,
+            ),
+          ),
+          Text(
+            'zone',
+            style: TextStyle(
+              color: Color(0xFF67DFDD),
+              fontFamily: "RobotoMedium",
+              fontSize: 22,
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: const Color(0xFF505050),
+    );
+  }
+}
+
 class CustomButton extends StatelessWidget {
   final String text;
+  final StatelessWidget screen;
 
   CustomButton({
-    Key? key, required this.text,
+    Key? key, required this.text, required this.screen,
   }) : super(key: key);
 
   @override
@@ -109,7 +123,12 @@ class CustomButton extends StatelessWidget {
             ],
             ),
         child: FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => screen),
+            );
+          },
           child: Text(
             text,
             style: const TextStyle(
@@ -133,30 +152,38 @@ class bottomContainer extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height/2.5,
           ),
-          CustomButton(text: 'Comprar Ticket'),
-          CustomButton(text: 'Regularizar Veículo'),
-          CustomButton(text: 'Mapa Municipal'),
+          CustomButton(text: 'Comprar Ticket', screen: ComprarTicket()),
+          CustomButton(text: 'Regularizar Veículo', screen: RegularizarVeiculo(),),
+          CustomButton(text: 'Mapa Municipal', screen: MapaMunicipal(),),
         ],
       ),
     );
   }
-  }
+}
 
 class MarbleBackground extends StatelessWidget {
-@override
-Widget build(BuildContext context) {
-  return Container(
-    decoration: BoxDecoration(
-      image: DecorationImage(
-        image: const AssetImage('assets/marblebg.jpg'),
-        colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.modulate)
-      )
-    ),
-  );
-}
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: const AssetImage('assets/marblebg.jpg'),
+          colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.modulate)
+        )
+      ),
+    );
+  }
 }
 
 class upperContainer extends StatelessWidget {
+  final String uppertext;
+  final String bottomtext;
+  final SvgPicture image;
+
+  upperContainer({
+    Key? key, required this.uppertext, required this.bottomtext, required this.image,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -181,28 +208,29 @@ class upperContainer extends StatelessWidget {
           //alignment: WrapAlignment.spaceBetween,
           spacing: 20,
           children: <Widget>[
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: const Text(
-                'Status do Veiculo',
+              child: Text(
+                uppertext,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: "RobotoMedium",
                   fontSize: 16,
                   color: Color(0xFF505050),
                 ),
               ),
             ),
-            Container(
+            SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: SvgPicture.asset('assets/car_art.svg')
+                height: 137,
+                child: image
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: const Text(
-                'Você não está estacionado',
+              child: Text(
+                bottomtext,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                     fontFamily: "RobotoMedium",
                     fontSize: 22,
                     color: Color(0xFF505050)
