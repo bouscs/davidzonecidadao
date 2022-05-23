@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:davidzonecidadao/main.dart';
+import 'package:davidzonecidadao/screens/SelecionarTempo.dart';
 
 class SelecionarMetodoPagamento extends StatefulWidget {
   @override
@@ -60,7 +61,17 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 1,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 1)),
-                  CustomTextBox(text: "Cartão")
+                  CustomTextBox(flatButton: FlatButton(
+                    onPressed: () => setState(() => selectedRadio = 1),
+                    minWidth: 270,
+                    child: const Text(
+                      "Cartão",
+                      style: TextStyle(
+                        fontFamily: "RobotoRegular",
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),)
                 ],),
             ),
             Padding(
@@ -72,7 +83,17 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 2,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 2)),
-                  CustomTextBox(text: "Pix")
+                  CustomTextBox(flatButton: FlatButton(
+                    onPressed: () => setState(() => selectedRadio = 2),
+                    minWidth: 270,
+                    child: const Text(
+                      "Pix",
+                      style: TextStyle(
+                        fontFamily: "RobotoRegular",
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),)
                 ],),
             ),
 
@@ -84,41 +105,5 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
   }
 }
 
-class CustomTextBox extends StatelessWidget {
-  final String text;
-
-  CustomTextBox({
-    Key? key, required this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context){
-    return Container(
-        alignment: Alignment.center,
-        width: 150,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(17),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.25),
-                blurRadius: 10,
-                spreadRadius: 1,
-                offset: const Offset(0,4),
-              )]
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Text(
-            text,
-            style: TextStyle(
-              fontFamily: "RobotoRegular",
-              fontSize: 14,
-            ),
-          ),
-        )
-    );
-  }
-}
 
 

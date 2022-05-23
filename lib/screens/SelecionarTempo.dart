@@ -61,7 +61,17 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 1,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 1)),
-                  CustomTextBox(text: "1 Hora - R\$2,50")
+                  CustomTextBox(flatButton: FlatButton(
+                    onPressed: () => setState(() => selectedRadio = 1),
+                    minWidth: 270,
+                    child: const Text(
+                      "1 Hora - R\$2,50",
+                      style: TextStyle(
+                        fontFamily: "RobotoRegular",
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),)
                 ],),
             ),
             Padding(
@@ -73,7 +83,17 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 2,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 2)),
-                  CustomTextBox(text: "2 Horas - R\$5,00")
+                  CustomTextBox(flatButton: FlatButton(
+                    onPressed: () => setState(() => selectedRadio = 2),
+                    minWidth: 270,
+                    child: const Text(
+                      "2 Horas - R\$5,00",
+                      style: TextStyle(
+                        fontFamily: "RobotoRegular",
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),)
                 ],),
             ),
             Padding(
@@ -85,7 +105,17 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 3,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 3)),
-                  CustomTextBox(text: "3 Horas - R\$7,50")
+                  CustomTextBox(flatButton: FlatButton(
+                    onPressed: () => setState(() => selectedRadio = 3),
+                    minWidth: 270,
+                    child: const Text(
+                      "3 Horas - R\$7,50",
+                      style: TextStyle(
+                        fontFamily: "RobotoRegular",
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),)
                 ],),
             ),
             Padding(
@@ -97,7 +127,17 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 4,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 4)),
-                  CustomTextBox(text: "4 Horas - R\$10,00")
+                  CustomTextBox(flatButton: FlatButton(
+                    onPressed: () => setState(() => selectedRadio = 4),
+                    minWidth: 270,
+                    child: const Text(
+                      "4 Horas - R\$10,00",
+                      style: TextStyle(
+                        fontFamily: "RobotoRegular",
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),)
                 ],),
             ),
             CustomButton(text: "Próximo", screen: SelecionarMetodoPagamento())
@@ -109,10 +149,10 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
 }
 
 class CustomTextBox extends StatelessWidget {
-  final String text;
+  final FlatButton flatButton;
 
   CustomTextBox({
-    Key? key, required this.text,
+    Key? key, required this.flatButton,
   }) : super(key: key);
 
   @override
@@ -131,16 +171,7 @@ class CustomTextBox extends StatelessWidget {
               offset: const Offset(0,4),
             )]
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Text(
-            text,
-            style: TextStyle(
-                fontFamily: "RobotoRegular",
-                fontSize: 14,
-            ),
-      ),
-    )
+      child: flatButton
     );
   }
 }
