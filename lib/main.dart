@@ -41,12 +41,16 @@ class MyHomePage extends StatelessWidget {
       body: Stack(
         children: [
           MarbleBackground(),
-          upperContainer(
-            uppertext: 'Status do Veiculo',
-            image: SvgPicture.asset('assets/car_art.svg'),
-            bottomtext: 'Você não está estacionado',
+          Column(
+            children: [
+              upperContainer(
+                uppertext: 'Status do Veiculo',
+                image: SvgPicture.asset('assets/car_art.svg'),
+                bottomtext: 'Você não está estacionado',
+              ),
+              bottomContainer(),
+            ],
           ),
-          bottomContainer(),
         ],
       )
       );
@@ -95,7 +99,7 @@ class CustomAppBar extends StatelessWidget {
 
 class CustomButton extends StatelessWidget {
   final String text;
-  final StatelessWidget screen;
+  final Widget screen;
 
   CustomButton({
     Key? key, required this.text, required this.screen,
@@ -147,15 +151,18 @@ class bottomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height/2.5,
-          ),
-          CustomButton(text: 'Comprar Ticket', screen: ComprarTicket()),
-          CustomButton(text: 'Regularizar Veículo', screen: RegularizarVeiculo(),),
-          CustomButton(text: 'Mapa Municipal', screen: MapaMunicipal(),),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+        child: Column(
+          children: [
+            //SizedBox(
+              //height: MediaQuery.of(context).size.height/2.5,
+            //),
+            CustomButton(text: 'Comprar Ticket', screen: ComprarTicket()),
+            CustomButton(text: 'Regularizar Veículo', screen: RegularizarVeiculo(),),
+            CustomButton(text: 'Mapa Municipal', screen: MapaMunicipal(),),
+          ],
+        ),
       ),
     );
   }
