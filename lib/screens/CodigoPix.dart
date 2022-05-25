@@ -4,6 +4,8 @@ import 'package:davidzonecidadao/main.dart';
 import 'package:davidzonecidadao/screens/PagamentoRealizado.dart';
 
 class CodigoPix extends StatelessWidget {
+  const CodigoPix({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +15,7 @@ class CodigoPix extends StatelessWidget {
       ),
         body: Stack(
           children: [
-            MarbleBackground(),
+            const MarbleBackground(),
             Column(
               children: [
                 upperContainer(
@@ -56,7 +58,7 @@ class CodigoPix extends StatelessWidget {
                     ),
                   ),
                 ),
-                CustomButton(text: 'Copiar Código', screen: PagamentoRealizado(), validation: 1)
+                const CustomButton(text: 'Copiar Código', screen: PagamentoRealizado(), validation: 1)
               ],
             ),
           ],

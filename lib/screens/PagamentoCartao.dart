@@ -10,7 +10,7 @@ class PagamentoCartao extends StatelessWidget {
         preferredSize: const Size.fromHeight(56),
         child: CustomAppBar(),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
             'Pagamento Cartao'
         ),

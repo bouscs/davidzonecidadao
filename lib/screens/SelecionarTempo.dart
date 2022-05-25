@@ -4,6 +4,8 @@ import 'package:davidzonecidadao/main.dart';
 import 'package:davidzonecidadao/screens/SelecionarMetodoPagamento.dart';
 
 class SelecionarTempo extends StatefulWidget {
+  const SelecionarTempo({Key? key}) : super(key: key);
+
   @override
   State<SelecionarTempo> createState() => _SelecionarTempoState();
 }
@@ -18,7 +20,7 @@ class _SelecionarTempoState extends State<SelecionarTempo> {
         ),
         body: Stack(
           children: [
-            MarbleBackground(),
+            const MarbleBackground(),
             Column(
               children: [
                 upperContainer(
@@ -27,7 +29,7 @@ class _SelecionarTempoState extends State<SelecionarTempo> {
                   imageheight: 137,
                   bottomtext: 'Selecione o tempo de estadia\ndesejado',
                 ),
-                bottomContainerComprarTicket(),
+                const bottomContainerComprarTicket(),
               ],
             ),
           ],
@@ -37,6 +39,8 @@ class _SelecionarTempoState extends State<SelecionarTempo> {
 }
 
 class bottomContainerComprarTicket extends StatefulWidget {
+  const bottomContainerComprarTicket({Key? key}) : super(key: key);
+
 
   @override
   State<bottomContainerComprarTicket> createState() => _bottomContainerComprarTicketState();
@@ -141,7 +145,7 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                   ),)
                 ],),
             ),
-            CustomButton(text: "Próximo", screen: SelecionarMetodoPagamento(), validation: selectedRadio,)
+            CustomButton(text: "Próximo", screen: const SelecionarMetodoPagamento(), validation: selectedRadio,)
           ],
         ),
       ),
@@ -152,7 +156,7 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
 class CustomTextBox extends StatelessWidget {
   final FlatButton flatButton;
 
-  CustomTextBox({
+  const CustomTextBox({
     Key? key, required this.flatButton,
   }) : super(key: key);
 

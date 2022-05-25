@@ -6,6 +6,8 @@ import 'package:davidzonecidadao/main.dart';
 import 'package:davidzonecidadao/screens/SelecionarTempo.dart';
 
 class SelecionarMetodoPagamento extends StatefulWidget {
+  const SelecionarMetodoPagamento({Key? key}) : super(key: key);
+
   @override
   State<SelecionarMetodoPagamento> createState() => _SelecionarMetodoPagamentoState();
 }
@@ -20,7 +22,7 @@ class _SelecionarMetodoPagamentoState extends State<SelecionarMetodoPagamento> {
         ),
         body: Stack(
           children: [
-            MarbleBackground(),
+            const MarbleBackground(),
             Column(
               children: [
                 upperContainer(
@@ -29,7 +31,7 @@ class _SelecionarMetodoPagamentoState extends State<SelecionarMetodoPagamento> {
                   imageheight: 137,
                   bottomtext: 'Selecione o tempo de estadia\ndesejado',
                 ),
-                bottomContainerComprarTicket(),
+                const bottomContainerComprarTicket(),
               ],
             ),
           ],
@@ -39,6 +41,8 @@ class _SelecionarMetodoPagamentoState extends State<SelecionarMetodoPagamento> {
 }
 
 class bottomContainerComprarTicket extends StatefulWidget {
+  const bottomContainerComprarTicket({Key? key}) : super(key: key);
+
 
   @override
   State<bottomContainerComprarTicket> createState() => _bottomContainerComprarTicketState();
@@ -106,7 +110,7 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                 width: 217,
                 height: 47,
                 decoration: BoxDecoration(
-                  color: Color(0xFF505050),
+                  color: const Color(0xFF505050),
                   borderRadius: const BorderRadius.all(
                     Radius.circular(30),
                   ),
@@ -124,7 +128,7 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                     if ( selectedRadio == 1 ) {
                       Navigator.push( context, MaterialPageRoute(builder: (context) => PagamentoCartao()));
                     } else if ( selectedRadio == 2 ) {
-                      Navigator.push( context, MaterialPageRoute(builder: (context) => PagamentoPix()));
+                      Navigator.push( context, MaterialPageRoute(builder: (context) => const PagamentoPix()));
                     } else {
                       const snackBar = SnackBar(
                         content: Text('Selecione uma Opção'),

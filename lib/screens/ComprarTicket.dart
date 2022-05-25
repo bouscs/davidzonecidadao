@@ -4,6 +4,8 @@ import 'package:davidzonecidadao/main.dart';
 import 'package:davidzonecidadao/screens/SelecionarTempo.dart';
 
 class ComprarTicket extends StatelessWidget {
+  const ComprarTicket({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +15,7 @@ class ComprarTicket extends StatelessWidget {
       ),
       body: Stack(
         children: [
-        MarbleBackground(),
+        const MarbleBackground(),
         SingleChildScrollView(
           reverse: true,
           child: Column(
@@ -35,6 +37,8 @@ class ComprarTicket extends StatelessWidget {
 }
 
 class bottomContainerComprarTicket extends StatelessWidget {
+  const bottomContainerComprarTicket({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,7 +47,7 @@ class bottomContainerComprarTicket extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
         child: Column(
-          children: [
+          children: const [
             CustomTextfield(text: "Placa do Veículo", icon: Icon(
               Icons.directions_car_outlined,
               color: Color(0xFF3F3F3F),)
@@ -64,7 +68,7 @@ class CustomTextfield extends StatelessWidget {
   final String text;
   final Icon icon;
 
-  CustomTextfield({
+  const CustomTextfield({
     Key? key, required this.text, required this.icon,
   }) : super(key: key);
 
@@ -92,7 +96,7 @@ class CustomTextfield extends StatelessWidget {
             children: [
               Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 15,
                   fontFamily: "RobotoRegular",
                   color: Color(0xFF676767),

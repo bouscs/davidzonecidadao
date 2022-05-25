@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:davidzonecidadao/main.dart';
 
 class PagamentoRealizado extends StatelessWidget {
+  const PagamentoRealizado({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,7 +12,7 @@ class PagamentoRealizado extends StatelessWidget {
         preferredSize: const Size.fromHeight(56),
         child: CustomAppBar(),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
             'Pagamento Realizado'
         ),

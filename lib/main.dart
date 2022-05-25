@@ -103,7 +103,7 @@ class CustomButton extends StatelessWidget {
   final Widget screen;
   final int validation;
 
-  CustomButton({
+  const CustomButton({
     Key? key, required this.text, required this.screen, required this.validation,
   }) : super(key: key);
 
@@ -153,6 +153,8 @@ class CustomButton extends StatelessWidget {
 }
 
 class bottomContainer extends StatelessWidget {
+  const bottomContainer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -164,7 +166,7 @@ class bottomContainer extends StatelessWidget {
             //SizedBox(
               //height: MediaQuery.of(context).size.height/2.5,
             //),
-            CustomButton(text: 'Comprar Ticket', screen: ComprarTicket(), validation: 1,),
+            const CustomButton(text: 'Comprar Ticket', screen: ComprarTicket(), validation: 1,),
             CustomButton(text: 'Regularizar Veículo', screen: RegularizarVeiculo(), validation: 1,),
             CustomButton(text: 'Mapa Municipal', screen: MapaMunicipal(), validation: 1,),
           ],
@@ -175,6 +177,8 @@ class bottomContainer extends StatelessWidget {
 }
 
 class MarbleBackground extends StatelessWidget {
+  const MarbleBackground({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -194,7 +198,7 @@ class upperContainer extends StatelessWidget {
   final SvgPicture image;
   final double imageheight;
 
-  upperContainer({
+  const upperContainer({
     Key? key, required this.uppertext, required this.bottomtext, required this.image, required this.imageheight
   }) : super(key: key);
 

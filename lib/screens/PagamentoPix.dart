@@ -4,6 +4,8 @@ import 'package:davidzonecidadao/main.dart';
 import 'package:davidzonecidadao/screens/CodigoPix.dart';
 
 class PagamentoPix extends StatelessWidget {
+  const PagamentoPix({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +15,7 @@ class PagamentoPix extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          MarbleBackground(),
+          const MarbleBackground(),
           Column(
             children: [
               upperContainer(
