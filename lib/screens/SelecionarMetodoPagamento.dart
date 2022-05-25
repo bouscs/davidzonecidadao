@@ -1,3 +1,5 @@
+import 'package:davidzonecidadao/screens/PagamentoCartao.dart';
+import 'package:davidzonecidadao/screens/PagamentoPix.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:davidzonecidadao/main.dart';
@@ -24,6 +26,7 @@ class _SelecionarMetodoPagamentoState extends State<SelecionarMetodoPagamento> {
                 upperContainer(
                   uppertext: 'Comprar Ticket',
                   image: SvgPicture.asset('assets/ticket_art.svg'),
+                  imageheight: 137,
                   bottomtext: 'Selecione o tempo de estadia\ndesejado',
                 ),
                 bottomContainerComprarTicket(),
@@ -97,7 +100,48 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                 ],),
             ),
 
-            CustomButton(text: "Próximo", screen: MyHomePage())
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                width: 217,
+                height: 47,
+                decoration: BoxDecoration(
+                  color: Color(0xFF505050),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.25),
+                      spreadRadius: 1,
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    )
+                  ],
+                ),
+                child: FlatButton(
+                  onPressed: () {
+                    if ( selectedRadio == 1 ) {
+                      Navigator.push( context, MaterialPageRoute(builder: (context) => PagamentoCartao()));
+                    } else if ( selectedRadio == 2 ) {
+                      Navigator.push( context, MaterialPageRoute(builder: (context) => PagamentoPix()));
+                    } else {
+                      const snackBar = SnackBar(
+                        content: Text('Selecione uma Opção'),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  },
+                  child: const Text(
+                    "Próximo",
+                    style: TextStyle(
+                      fontFamily: 'RobotoBold',
+                      fontSize: 16,
+                      color: Color(0xFFFFFFFF),
+                    ),),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -46,6 +46,7 @@ class MyHomePage extends StatelessWidget {
               upperContainer(
                 uppertext: 'Status do Veiculo',
                 image: SvgPicture.asset('assets/car_art.svg'),
+                imageheight: 137,
                 bottomtext: 'Você não está estacionado',
               ),
               bottomContainer(),
@@ -100,9 +101,10 @@ class CustomAppBar extends StatelessWidget {
 class CustomButton extends StatelessWidget {
   final String text;
   final Widget screen;
+  final int validation;
 
   CustomButton({
-    Key? key, required this.text, required this.screen,
+    Key? key, required this.text, required this.screen, required this.validation,
   }) : super(key: key);
 
   @override
@@ -128,10 +130,14 @@ class CustomButton extends StatelessWidget {
             ),
         child: FlatButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => screen),
-            );
+            if ( validation != 0 ) {
+              Navigator.push( context, MaterialPageRoute(builder: (context) => screen),);
+            } else {
+              const snackBar = SnackBar(
+                content: Text('Selecione uma Opção'),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
           },
           child: Text(
             text,
@@ -158,9 +164,9 @@ class bottomContainer extends StatelessWidget {
             //SizedBox(
               //height: MediaQuery.of(context).size.height/2.5,
             //),
-            CustomButton(text: 'Comprar Ticket', screen: ComprarTicket()),
-            CustomButton(text: 'Regularizar Veículo', screen: RegularizarVeiculo(),),
-            CustomButton(text: 'Mapa Municipal', screen: MapaMunicipal(),),
+            CustomButton(text: 'Comprar Ticket', screen: ComprarTicket(), validation: 1,),
+            CustomButton(text: 'Regularizar Veículo', screen: RegularizarVeiculo(), validation: 1,),
+            CustomButton(text: 'Mapa Municipal', screen: MapaMunicipal(), validation: 1,),
           ],
         ),
       ),
@@ -186,9 +192,10 @@ class upperContainer extends StatelessWidget {
   final String uppertext;
   final String bottomtext;
   final SvgPicture image;
+  final double imageheight;
 
   upperContainer({
-    Key? key, required this.uppertext, required this.bottomtext, required this.image,
+    Key? key, required this.uppertext, required this.bottomtext, required this.image, required this.imageheight
   }) : super(key: key);
 
   @override
@@ -229,7 +236,7 @@ class upperContainer extends StatelessWidget {
             ),
             SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: 137,
+                height: imageheight,
                 child: image
             ),
             SizedBox(

@@ -24,6 +24,7 @@ class _SelecionarTempoState extends State<SelecionarTempo> {
                 upperContainer(
                   uppertext: 'Comprar Ticket',
                   image: SvgPicture.asset('assets/ticket_art.svg'),
+                  imageheight: 137,
                   bottomtext: 'Selecione o tempo de estadia\ndesejado',
                 ),
                 bottomContainerComprarTicket(),
@@ -140,7 +141,7 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                   ),)
                 ],),
             ),
-            CustomButton(text: "Próximo", screen: SelecionarMetodoPagamento())
+            CustomButton(text: "Próximo", screen: SelecionarMetodoPagamento(), validation: selectedRadio,)
           ],
         ),
       ),

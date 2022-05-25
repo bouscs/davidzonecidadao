@@ -21,6 +21,7 @@ class ComprarTicket extends StatelessWidget {
               upperContainer(
                 uppertext: 'Comprar Ticket',
                 image: SvgPicture.asset('assets/ticket_art.svg'),
+                imageheight: 137,
                 bottomtext: 'Informe os dados para\npagamento',
                 ),
               bottomContainerComprarTicket(),
@@ -51,7 +52,7 @@ class bottomContainerComprarTicket extends StatelessWidget {
               Icons.person_outline,
               color: Color(0xFF3F3F3F),)
             ),
-            CustomButton(text: "Próximo", screen: SelecionarTempo()),
+            CustomButton(text: "Próximo", screen: SelecionarTempo(), validation: 1,),
           ],
         ),
       ),
