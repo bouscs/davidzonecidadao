@@ -65,7 +65,7 @@ class CodigoPix extends StatelessWidget {
                     width: 217,
                     height: 47,
                     decoration: BoxDecoration(
-                      color: Color(0xFF505050),
+                      color: const Color(0xFF505050),
                       borderRadius: const BorderRadius.all(
                         Radius.circular(30),
                       ),
@@ -87,17 +87,26 @@ class CodigoPix extends StatelessWidget {
                         .then((value) {// only if ->
                           ScaffoldMessenger.of(context).showSnackBar(snackBar); });
                       },
-                      child: const Text(
-                        'Copiar Código',
-                        style: TextStyle(
-                          fontFamily: 'RobotoBold',
-                          fontSize: 16,
-                          color: Color(0xFFFFFFFF),
-                        ),),
+                      child: Wrap(
+                        spacing: 10,
+                        children: const [
+                          Icon(Icons.copy, color: Colors.white, size: 20,),
+                          Text(
+                            'Copiar Código',
+                            style: TextStyle(
+                              fontFamily: 'RobotoBold',
+                              fontSize: 16,
+                              color: Color(0xFFFFFFFF),
+                            ),),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                const CustomButton(text: 'SIMULAR PAGAMENTO', screen: PagamentoRealizado(), validation: 1),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: PaymentButton(),
+                ),
               ],
             ),
           ],
@@ -105,3 +114,92 @@ class CodigoPix extends StatelessWidget {
     );
   }
 }
+
+class PaymentButton extends StatefulWidget {
+
+  const PaymentButton({
+    Key? key,}) : super(key: key);
+
+  @override
+  State<PaymentButton> createState() => _PaymentButtonState();
+}
+
+class _PaymentButtonState extends State<PaymentButton> {
+  PaymentState state = PaymentState.loading;
+
+  @override
+  Widget build(BuildContext context) {
+    final isDone = state == PaymentState.done;
+    final color = isDone ? Colors.green : const Color(0xFF505050);
+    return Wrap(
+      spacing: 15,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      alignment: WrapAlignment.center,
+      direction: Axis.vertical,
+      children: [
+        Wrap(
+          spacing: 10,
+          children: [
+            Container(
+              width: 25,
+              height: 25,
+              decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+                child: Center(
+                    child: SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: isDone
+                      ? const Icon(Icons.done, color: Colors.white, size: 15,) :
+                        const CircularProgressIndicator(color: Colors.white,)),
+                ),
+            ),
+            const Text(
+              'Aguardando Pagamento',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'RobotoRegular',
+                color: Color(0xFF505050),
+              ),)
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Container(
+            width: 217,
+            height: 47,
+            decoration: BoxDecoration(
+              color: const Color(0xFF505050),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(30),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.25),
+                  spreadRadius: 1,
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                )
+              ],
+            ),
+            child: FlatButton(
+              onPressed: () async {
+                setState(() => state = PaymentState.done);
+                await Future.delayed(const Duration(milliseconds: 1500));
+                Navigator.push( context, MaterialPageRoute(builder: (context) => const PagamentoRealizado()),);
+                },
+              child: const Text(
+                'Simular Pagamento',
+                style: TextStyle(
+                  fontFamily: 'RobotoBold',
+                  fontSize: 16,
+                  color: Color(0xFFFFFFFF),
+                ),),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+enum PaymentState { loading, done }

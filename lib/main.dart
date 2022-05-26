@@ -205,8 +205,6 @@ class upperContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //height: MediaQuery.of(context).size.height/2.5,
-      //alignment: Alignment.topCenter,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.white,
