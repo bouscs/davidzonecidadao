@@ -16,21 +16,18 @@ class MapaMunicipal extends StatelessWidget {
     mapController = controller;
   }
 
-  // TODO: colocar a setinha de retorno na appbar
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(56),
-          child: CustomAppBar(),
-        ),
-        body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 11.7,
-          ),
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(56),
+        child: CustomAppBar(),
+      ),
+      body: GoogleMap(
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: _center,
+          zoom: 11.7,
         ),
       ),
     );
