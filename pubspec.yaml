@@ -78,6 +78,8 @@ flutter:
     - assets/ticket_art.svg
     - assets/pix.svg
     - assets/qrcode.svg
+    - assets/hourglass.svg
+    - assets/paymentmethod.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -27,9 +27,9 @@ class _SelecionarMetodoPagamentoState extends State<SelecionarMetodoPagamento> {
               children: [
                 upperContainer(
                   uppertext: 'Comprar Ticket',
-                  image: SvgPicture.asset('assets/ticket_art.svg'),
+                  image: SvgPicture.asset('assets/paymentmethod.svg'),
                   imageheight: 137,
-                  bottomtext: 'Selecione o tempo de estadia\ndesejado',
+                  bottomtext: 'Selecione o método de\npagamento',
                 ),
                 const bottomContainerComprarTicket(),
               ],

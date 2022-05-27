@@ -25,7 +25,7 @@ class _SelecionarTempoState extends State<SelecionarTempo> {
               children: [
                 upperContainer(
                   uppertext: 'Comprar Ticket',
-                  image: SvgPicture.asset('assets/ticket_art.svg'),
+                  image: SvgPicture.asset('assets/hourglass.svg'),
                   imageheight: 137,
                   bottomtext: 'Selecione o tempo de estadia\ndesejado',
                 ),
