@@ -9,30 +9,29 @@ class ComprarTicket extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(56),
-        child: CustomAppBar(),
-      ),
-      body: Stack(
-        children: [
-        const MarbleBackground(),
-        SingleChildScrollView(
-          reverse: true,
-          child: Column(
-            children: [
-              upperContainer(
-                uppertext: 'Comprar Ticket',
-                image: SvgPicture.asset('assets/ticket_art.svg'),
-                imageheight: 137,
-                bottomtext: 'Informe os dados para\npagamento',
-                ),
-              bottomContainerComprarTicket(),
-            ],
-          ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(56),
+          child: CustomAppBar(),
         ),
-    ],
-    )
-    );
+        body: Stack(
+          children: [
+            const MarbleBackground(),
+            SingleChildScrollView(
+              reverse: true,
+              child: Column(
+                children: [
+                  upperContainer(
+                    uppertext: 'Comprar Ticket',
+                    image: SvgPicture.asset('assets/ticket_art.svg'),
+                    imageheight: 137,
+                    bottomtext: 'Informe os dados para\npagamento',
+                  ),
+                  bottomContainerComprarTicket(),
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 }
 
@@ -48,15 +47,23 @@ class bottomContainerComprarTicket extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
         child: Column(
           children: const [
-            CustomTextfield(text: "Placa do Veículo", icon: Icon(
-              Icons.directions_car_outlined,
-              color: Color(0xFF3F3F3F),)
+            CustomTextfield(
+                text: "Placa do Veículo",
+                icon: Icon(
+                  Icons.directions_car_outlined,
+                  color: Color(0xFF3F3F3F),
+                )),
+            CustomTextfield(
+                text: "CPF/CNPJ",
+                icon: Icon(
+                  Icons.person_outline,
+                  color: Color(0xFF3F3F3F),
+                )),
+            CustomButton(
+              text: "Próximo",
+              screen: SelecionarTempo(),
+              validation: 1,
             ),
-            CustomTextfield(text: "CPF/CNPJ", icon: Icon(
-              Icons.person_outline,
-              color: Color(0xFF3F3F3F),)
-            ),
-            CustomButton(text: "Próximo", screen: SelecionarTempo(), validation: 1,),
           ],
         ),
       ),
@@ -69,7 +76,9 @@ class CustomTextfield extends StatelessWidget {
   final Icon icon;
 
   const CustomTextfield({
-    Key? key, required this.text, required this.icon,
+    Key? key,
+    required this.text,
+    required this.icon,
   }) : super(key: key);
 
   @override
@@ -86,9 +95,9 @@ class CustomTextfield extends StatelessWidget {
                 color: Colors.black.withOpacity(0.25),
                 blurRadius: 10,
                 spreadRadius: 1,
-                offset: const Offset(0,4),
-              )]
-        ),
+                offset: const Offset(0, 4),
+              )
+            ]),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
@@ -107,7 +116,8 @@ class CustomTextfield extends StatelessWidget {
                 decoration: InputDecoration(
                   icon: icon,
                 ),
-              ),],
+              ),
+            ],
           ),
         ),
       ),

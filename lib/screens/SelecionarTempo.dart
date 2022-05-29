@@ -33,20 +33,20 @@ class _SelecionarTempoState extends State<SelecionarTempo> {
               ],
             ),
           ],
-        )
-    );
+        ));
   }
 }
 
 class bottomContainerComprarTicket extends StatefulWidget {
   const bottomContainerComprarTicket({Key? key}) : super(key: key);
 
-
   @override
-  State<bottomContainerComprarTicket> createState() => _bottomContainerComprarTicketState();
+  State<bottomContainerComprarTicket> createState() =>
+      _bottomContainerComprarTicketState();
 }
 
-class _bottomContainerComprarTicketState extends State<bottomContainerComprarTicket> {
+class _bottomContainerComprarTicketState
+    extends State<bottomContainerComprarTicket> {
   int selectedRadio = 0;
   @override
   Widget build(BuildContext context) {
@@ -66,18 +66,21 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 1,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 1)),
-                  CustomTextBox(flatButton: FlatButton(
-                    onPressed: () => setState(() => selectedRadio = 1),
-                    minWidth: 270,
-                    child: const Text(
-                      "1 Hora - R\$2,50",
-                      style: TextStyle(
-                        fontFamily: "RobotoRegular",
-                        fontSize: 14,
+                  CustomTextBox(
+                    flatButton: FlatButton(
+                      onPressed: () => setState(() => selectedRadio = 1),
+                      minWidth: 270,
+                      child: const Text(
+                        "1 Hora - R\$2,50",
+                        style: TextStyle(
+                          fontFamily: "RobotoRegular",
+                          fontSize: 14,
+                        ),
                       ),
                     ),
-                  ),)
-                ],),
+                  )
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -88,18 +91,21 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 2,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 2)),
-                  CustomTextBox(flatButton: FlatButton(
-                    onPressed: () => setState(() => selectedRadio = 2),
-                    minWidth: 270,
-                    child: const Text(
-                      "2 Horas - R\$5,00",
-                      style: TextStyle(
-                        fontFamily: "RobotoRegular",
-                        fontSize: 14,
+                  CustomTextBox(
+                    flatButton: FlatButton(
+                      onPressed: () => setState(() => selectedRadio = 2),
+                      minWidth: 270,
+                      child: const Text(
+                        "2 Horas - R\$5,00",
+                        style: TextStyle(
+                          fontFamily: "RobotoRegular",
+                          fontSize: 14,
+                        ),
                       ),
                     ),
-                  ),)
-                ],),
+                  )
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -110,18 +116,21 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 3,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 3)),
-                  CustomTextBox(flatButton: FlatButton(
-                    onPressed: () => setState(() => selectedRadio = 3),
-                    minWidth: 270,
-                    child: const Text(
-                      "3 Horas - R\$7,50",
-                      style: TextStyle(
-                        fontFamily: "RobotoRegular",
-                        fontSize: 14,
+                  CustomTextBox(
+                    flatButton: FlatButton(
+                      onPressed: () => setState(() => selectedRadio = 3),
+                      minWidth: 270,
+                      child: const Text(
+                        "3 Horas - R\$7,50",
+                        style: TextStyle(
+                          fontFamily: "RobotoRegular",
+                          fontSize: 14,
+                        ),
                       ),
                     ),
-                  ),)
-                ],),
+                  )
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -132,20 +141,27 @@ class _bottomContainerComprarTicketState extends State<bottomContainerComprarTic
                       value: 4,
                       groupValue: selectedRadio,
                       onChanged: (value) => setState(() => selectedRadio = 4)),
-                  CustomTextBox(flatButton: FlatButton(
-                    onPressed: () => setState(() => selectedRadio = 4),
-                    minWidth: 270,
-                    child: const Text(
-                      "4 Horas - R\$10,00",
-                      style: TextStyle(
-                        fontFamily: "RobotoRegular",
-                        fontSize: 14,
+                  CustomTextBox(
+                    flatButton: FlatButton(
+                      onPressed: () => setState(() => selectedRadio = 4),
+                      minWidth: 270,
+                      child: const Text(
+                        "4 Horas - R\$10,00",
+                        style: TextStyle(
+                          fontFamily: "RobotoRegular",
+                          fontSize: 14,
+                        ),
                       ),
                     ),
-                  ),)
-                ],),
+                  )
+                ],
+              ),
             ),
-            CustomButton(text: "Próximo", screen: const SelecionarMetodoPagamento(), validation: selectedRadio,)
+            CustomButton(
+              text: "Próximo",
+              screen: const SelecionarMetodoPagamento(),
+              validation: selectedRadio,
+            )
           ],
         ),
       ),
@@ -157,28 +173,26 @@ class CustomTextBox extends StatelessWidget {
   final FlatButton flatButton;
 
   const CustomTextBox({
-    Key? key, required this.flatButton,
+    Key? key,
+    required this.flatButton,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
-      width: 150,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(17),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.25),
-              blurRadius: 10,
-              spreadRadius: 1,
-              offset: const Offset(0,4),
-            )]
-      ),
-      child: flatButton
-    );
+        alignment: Alignment.center,
+        width: 150,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(17),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.25),
+                blurRadius: 10,
+                spreadRadius: 1,
+                offset: const Offset(0, 4),
+              )
+            ]),
+        child: flatButton);
   }
 }
-
-
