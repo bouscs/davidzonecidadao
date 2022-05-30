@@ -4,6 +4,7 @@ import 'package:davidzonecidadao/screens/MapaMunicipal.dart';
 import 'package:davidzonecidadao/screens/RegularizarVeiculo.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:lottie/lottie.dart';
 import 'firebase_options.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
@@ -33,34 +34,37 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: AnimatedSplashScreen(
-        splash: Column(
-          children: [
-            SvgPicture.asset('assets/car_art.svg'),
-            Wrap(
-              children: const [
-                Text(
-                  'David',
-                  style: TextStyle(
-                    color: Color(0xFFECECEA),
-                    fontFamily: "RobotoMedium",
-                    fontSize: 35,
+        splash: Center(
+          child: Column(
+            children: [
+              Container(
+                height: 180,
+                  child: Lottie.asset('assets/loadingcircles.json')),
+              Wrap(
+                children: const [
+                  Text(
+                    'David',
+                    style: TextStyle(
+                      color: Color(0xFFECECEA),
+                      fontFamily: "RobotoMedium",
+                      fontSize: 35,
+                    ),
                   ),
-                ),
-                Text(
-                  'zone',
-                  style: TextStyle(
-                    color: Color(0xFF67DFDD),
-                    fontFamily: "RobotoMedium",
-                    fontSize: 35,
+                  Text(
+                    'zone',
+                    style: TextStyle(
+                      color: Color(0xFF67DFDD),
+                      fontFamily: "RobotoMedium",
+                      fontSize: 35,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 100,
-              child: Image.asset('assets/cidadao_box.png'),
-            ),
-          ],
+                ],
+              ),
+              Container(
+                width: 100,
+                  child: Image.asset('assets/cidadao_box.png')),
+            ],
+          ),
         ),
         splashIconSize: 250,
         backgroundColor: Color(0xFF2D2D2D),
