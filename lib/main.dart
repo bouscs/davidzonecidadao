@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:davidzonecidadao/screens/ComprarTicket.dart';
 import 'package:davidzonecidadao/screens/MapaMunicipal.dart';
 import 'package:davidzonecidadao/screens/RegularizarVeiculo.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
+import 'package:page_transition/page_transition.dart';
 
 
 Future<void> main() async {
@@ -12,8 +15,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +32,42 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: MyHomePage()
+      home: AnimatedSplashScreen(
+        splash: Column(
+          children: [
+            SvgPicture.asset('assets/car_art.svg'),
+            Wrap(
+              children: const [
+                Text(
+                  'David',
+                  style: TextStyle(
+                    color: Color(0xFFECECEA),
+                    fontFamily: "RobotoMedium",
+                    fontSize: 35,
+                  ),
+                ),
+                Text(
+                  'zone',
+                  style: TextStyle(
+                    color: Color(0xFF67DFDD),
+                    fontFamily: "RobotoMedium",
+                    fontSize: 35,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 100,
+              child: Image.asset('assets/cidadao_box.png'),
+            ),
+          ],
+        ),
+        splashIconSize: 250,
+        backgroundColor: Color(0xFF2D2D2D),
+        splashTransition: SplashTransition.fadeTransition,
+        pageTransitionType: PageTransitionType.rightToLeftWithFade,
+        nextScreen: MyHomePage(),
+      )
     );
   }
 }
