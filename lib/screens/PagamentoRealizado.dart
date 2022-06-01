@@ -3,7 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:davidzonecidadao/main.dart';
 
 class PagamentoRealizado extends StatelessWidget {
-  const PagamentoRealizado({Key? key}) : super(key: key);
+  const PagamentoRealizado({Key? key, this.dadosPagamento}) : super(key: key);
+  final dadosPagamento;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class PagamentoRealizado extends StatelessWidget {
               direction: Axis.vertical,
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 20,
-              children: const [
+              children: [
                 Icon(Icons.check_circle, color: Colors.white, size: 80,),
                 Text(
                   'Pagamento Realizado!',
@@ -32,6 +33,15 @@ class PagamentoRealizado extends StatelessWidget {
                     fontSize: 24,
                     color: Colors.white,
                   ),
+                ),
+                Wrap(
+                  direction: Axis.vertical,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  children: [
+                    Text('Placa: ${dadosPagamento.placa}'),
+                    Text('Tempo: ${dadosPagamento.tempo} minutos.'),
+                    Text('Método de Pagamento: ${dadosPagamento.meioPagamento}.'),
+                  ],
                 ),
                 HomeButton(),
               ],

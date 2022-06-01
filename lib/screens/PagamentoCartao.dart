@@ -9,13 +9,22 @@ import 'package:davidzonecidadao/screens/PagamentoRealizado.dart';
 
 
 class PagamentoCartao extends StatefulWidget {
-  const PagamentoCartao({Key? key}) : super(key: key);
+  const PagamentoCartao({Key? key, required this.valor, required this.tempo, this.cidadaoInfo}) : super(key: key);
+
+  final double valor;
+  final int tempo;
+  final cidadaoInfo;
 
   @override
-  _PagamentoCartao createState() => _PagamentoCartao();
+  _PagamentoCartao createState() => _PagamentoCartao(valor, tempo, cidadaoInfo);
 }
 
 class _PagamentoCartao extends State<PagamentoCartao> {
+  final double valor;
+  final int tempo;
+  final cidadaoInfo;
+  _PagamentoCartao(this.valor, this.tempo, this.cidadaoInfo);
+
   String cardNumber = '';
   String expiryDate= '';
   String cardHolderName = '';
@@ -174,11 +183,21 @@ class _PagamentoCartao extends State<PagamentoCartao> {
                                     child: FlatButton(
                                       onPressed: () async {
                                         if (formKey.currentState!.validate()) {
+                                          var dadosPagamento = DadosPagamentoCartao(
+                                              cidadaoInfo.plate,
+                                              cidadaoInfo.id,
+                                              tempo,
+                                              cardNumber,
+                                              cardHolderName,
+                                              expiryDate,
+                                              cvvCode,
+                                              'cartao',
+                                          );
                                           setState(() => state = PaymentState.done);
                                           await Future.delayed(
                                               const Duration(milliseconds: 1500));
                                           Navigator.push(context, MaterialPageRoute(
-                                              builder: (context) => const PagamentoRealizado()),);
+                                              builder: (context) => PagamentoRealizado(dadosPagamento: dadosPagamento)),);
                                         }
                                         else {
                                           const snackBar = SnackBar(
@@ -187,8 +206,8 @@ class _PagamentoCartao extends State<PagamentoCartao> {
                                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                         }
                                       },
-                                      child: const Text(
-                                        'Simular Pagamento',
+                                      child: Text(
+                                        'Pagar R\$${valor}0',
                                         style: TextStyle(
                                           fontFamily: 'RobotoBold',
                                           fontSize: 16,
@@ -220,4 +239,17 @@ class _PagamentoCartao extends State<PagamentoCartao> {
       isCvvFocused = creditCardModel.isCvvFocused;
     });
   }
+}
+
+class DadosPagamentoCartao {
+  String placa;
+  String cpfCnpj;
+  int tempo;
+  String numeroCartao;
+  String titular;
+  String validade;
+  String cvv;
+  String meioPagamento;
+
+  DadosPagamentoCartao(this.placa, this.cpfCnpj, this.tempo, this.numeroCartao, this.titular, this.validade, this.cvv, this.meioPagamento);
 }

@@ -205,10 +205,13 @@ class _bottomContainerComprarTicket
                           : _validatePlate = false;
                     });
                     if (!_validateId && !_validatePlate) {
+                      var cidadaoInfo = CidadaoInfo(_id.text.toString(), _plate.text.toString());
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SelecionarTempo()),
+                            builder: (context) => SelecionarTempo(
+                              cidadaoInfo: cidadaoInfo,
+                            )),
                       );
                     }
                   },
@@ -232,7 +235,7 @@ class _bottomContainerComprarTicket
 
 class CidadaoInfo {
   String id;
-  int plate;
+  String plate;
   CidadaoInfo(this.id, this.plate);
 }
 

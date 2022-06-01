@@ -4,7 +4,10 @@ import 'package:davidzonecidadao/main.dart';
 import 'package:davidzonecidadao/screens/CodigoPix.dart';
 
 class PagamentoPix extends StatelessWidget {
-  const PagamentoPix({Key? key}) : super(key: key);
+  const PagamentoPix({Key? key, required this.valor, required this.tempo, this.cidadaoInfo}) : super(key: key);
+  final double valor;
+  final int tempo;
+  final cidadaoInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class PagamentoPix extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: Column(
-                      children: const [
+                      children: [
                         Text(
                           'Valor',
                           style: TextStyle(
@@ -56,7 +59,7 @@ class PagamentoPix extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Text(
-                            'R\$XX,XX',
+                            'R\$${valor}0',
                             style: TextStyle(
                               fontSize: 20,
                               fontFamily: 'RobotoRegular',
@@ -69,7 +72,10 @@ class PagamentoPix extends StatelessWidget {
                   ),
                 ),
               ),
-              CustomButton(text: 'Gerar Código Pix', screen: CodigoPix(), validation: 1)
+              CustomButton(text: 'Gerar Código Pix', screen: CodigoPix(
+                valor: valor,
+                tempo: tempo,
+                cidadaoInfo: cidadaoInfo,), validation: 1)
             ],
           ),
         ],
