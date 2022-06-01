@@ -37,7 +37,7 @@ class _MapaMunicipal extends State<MapaMunicipal> {
           title: 'Posto DavidGas',
           snippet: 'Comprar ticket em dinheiro em horário comercial'),
       icon: BitmapDescriptor.defaultMarkerWithHue(
-        BitmapDescriptor.hueCyan,
+        BitmapDescriptor.hueRed,
       ),
     );
     Marker secoundMarker = Marker(
@@ -47,7 +47,7 @@ class _MapaMunicipal extends State<MapaMunicipal> {
           title: 'David University of Campinas',
           snippet: 'Comprar ticket em dinheiro em horário comercial'),
       icon: BitmapDescriptor.defaultMarkerWithHue(
-        BitmapDescriptor.hueCyan,
+        BitmapDescriptor.hueRed,
       ),
     );
     Marker thirdMarker = Marker(
@@ -57,14 +57,15 @@ class _MapaMunicipal extends State<MapaMunicipal> {
           title: 'Padaria DavidBread',
           snippet: 'Comprar ticket em dinheiro em horário comercial'),
       icon: BitmapDescriptor.defaultMarkerWithHue(
-        BitmapDescriptor.hueCyan,
+        BitmapDescriptor.hueRed,
       ),
     );
 
     Polygon firstPolygon = Polygon(
         polygonId: PolygonId((i++).toString()),
-        fillColor: Colors.white10,
+        fillColor: Colors.blueAccent.withOpacity(0.3),
         strokeColor: Colors.blueAccent,
+        strokeWidth: 3,
         points: const <LatLng>[
           LatLng(-22.922206, -47.061282),
           LatLng(-22.924138, -47.061515),
@@ -73,8 +74,9 @@ class _MapaMunicipal extends State<MapaMunicipal> {
         ]);
     Polygon secoundPolygon = Polygon(
         polygonId: PolygonId((i++).toString()),
-        fillColor: Colors.white10,
+        fillColor: Colors.blueAccent.withOpacity(0.3),
         strokeColor: Colors.blueAccent,
+        strokeWidth: 3,
         points: const <LatLng>[
           LatLng(-22.8320573, -47.05358),
           LatLng(-22.8364163, -47.0528129),
@@ -83,8 +85,9 @@ class _MapaMunicipal extends State<MapaMunicipal> {
         ]);
     Polygon thirdPolygon = Polygon(
         polygonId: PolygonId((i++).toString()),
-        fillColor: Colors.white10,
+        fillColor: Colors.blueAccent.withOpacity(0.3),
         strokeColor: Colors.blueAccent,
+        strokeWidth: 3,
         points: const <LatLng>[
           LatLng(-22.927801, -47.070698),
           LatLng(-22.926371, -47.071941),
