@@ -148,7 +148,7 @@ class _bottomContainerComprarTicket
                 fillColor: Colors.white54,
                 border: OutlineInputBorder(),
                 labelText: 'Placa',
-                hintText: 'xxx 0000',
+                hintText: 'ABC1234',
                 errorText: _validatePlate
                     ? getPlateMessage(verifyPlate(_plate.text.toString()))
                     : null,
@@ -159,6 +159,7 @@ class _bottomContainerComprarTicket
             ),
             TextField(
               controller: _id,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.person),
                 filled: true,

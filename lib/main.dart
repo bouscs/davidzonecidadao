@@ -34,34 +34,40 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: AnimatedSplashScreen(
-        splash: Center(
+        splash: Container(
+          alignment: Alignment.center,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: 180,
+              SizedBox(
+                height: 150,
                   child: Lottie.asset('assets/loadingcircles.json')),
-              Wrap(
-                children: const [
-                  Text(
-                    'David',
-                    style: TextStyle(
-                      color: Color(0xFFECECEA),
-                      fontFamily: "RobotoMedium",
-                      fontSize: 35,
+              SizedBox(
+                height: 50,
+                child: Wrap(
+                  children: const [
+                    Text(
+                      'David',
+                      style: TextStyle(
+                        color: Color(0xFFECECEA),
+                        fontFamily: "RobotoMedium",
+                        fontSize: 35,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'zone',
-                    style: TextStyle(
-                      color: Color(0xFF67DFDD),
-                      fontFamily: "RobotoMedium",
-                      fontSize: 35,
+                    Text(
+                      'zone',
+                      style: TextStyle(
+                        color: Color(0xFF67DFDD),
+                        fontFamily: "RobotoMedium",
+                        fontSize: 35,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Container(
-                width: 100,
+              SizedBox(
+                height: 25,
                   child: Image.asset('assets/cidadao_box.png')),
             ],
           ),
