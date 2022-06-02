@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:davidzonecidadao/screens/ComprarTicket.dart';
 import 'package:davidzonecidadao/screens/MapaMunicipal.dart';
-import 'package:davidzonecidadao/screens/RegularizarVeiculo.dart';
+import 'package:davidzonecidadao/screens/ConsultarTicket.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:lottie/lottie.dart';
@@ -96,16 +96,16 @@ class MyHomePage extends StatelessWidget {
           Column(
             children: [
               upperContainer(
-                uppertext: 'Status do Veiculo',
+                uppertext: 'Bem vindo!',
                 image: SvgPicture.asset('assets/car_art.svg'),
                 imageheight: 137,
-                bottomtext: 'Você não está estacionado',
+                bottomtext: 'Compre, Consulte ou navegue\npelo Mapa Municipal',
               ),
               bottomContainer(),
             ],
           ),
         ],
-      )
+      ),
       );
   }
 }
@@ -219,7 +219,7 @@ class bottomContainer extends StatelessWidget {
               //height: MediaQuery.of(context).size.height/2.5,
             //),
             const CustomButton(text: 'Comprar Ticket', screen: ComprarTicket(), validation: 1,),
-            CustomButton(text: 'Regularizar Veículo', screen: RegularizarVeiculo(), validation: 1,),
+            CustomButton(text: 'Consultar Ticket', screen: ConsultarTicket(), validation: 1,),
             CustomButton(text: 'Mapa Municipal', screen: MapaMunicipal(), validation: 1,),
           ],
         ),
