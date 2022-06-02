@@ -180,7 +180,7 @@ class _CodigoPixState extends State<CodigoPix> {
                                   cidadaoInfo.plate,
                                   cidadaoInfo.id,
                                   tempo,
-                                  'pix');
+                                  'Pix');
                               setState(() => state = PaymentState.done);
                               await Future.delayed(const Duration(milliseconds: 1500));
                               Navigator.push( context, MaterialPageRoute(builder: (context) => PagamentoRealizado(

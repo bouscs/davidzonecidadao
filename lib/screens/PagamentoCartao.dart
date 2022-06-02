@@ -191,7 +191,7 @@ class _PagamentoCartao extends State<PagamentoCartao> {
                                               cardHolderName,
                                               expiryDate,
                                               cvvCode,
-                                              'cartao',
+                                              'Cartao',
                                           );
                                           setState(() => state = PaymentState.done);
                                           await Future.delayed(

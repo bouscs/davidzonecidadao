@@ -25,7 +25,7 @@ class PagamentoRealizado extends StatelessWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 20,
               children: [
-                Icon(Icons.check_circle, color: Colors.white, size: 80,),
+                //Icon(Icons.check_circle, color: Colors.white, size: 80,),
                 Text(
                   'Pagamento Realizado!',
                   style: TextStyle(
@@ -36,11 +36,87 @@ class PagamentoRealizado extends StatelessWidget {
                 ),
                 Wrap(
                   direction: Axis.vertical,
-                  crossAxisAlignment: WrapCrossAlignment.start,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    Text('Placa: ${dadosPagamento.placa}'),
-                    Text('Tempo: ${dadosPagamento.tempo} minutos.'),
-                    Text('Método de Pagamento: ${dadosPagamento.meioPagamento}.'),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                        color: Color(0xFF505050),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black38,
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            offset: Offset(7.0, 7.0),
+                          )
+                        ],
+                      ),
+                      width: MediaQuery.of(context).size.width/1.4,
+                      height: MediaQuery.of(context).size.height/15,
+                      alignment: Alignment.center,
+                      child: Text('TICKET', style: TextStyle(color: Colors.white, fontSize: 24, fontFamily: 'RobotoBold'),),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width/1.4,
+                      height: MediaQuery.of(context).size.height/3,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black38,
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            offset: Offset(7.0, 7.0),
+                          )
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Wrap(
+                          direction: Axis.vertical,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            ticketinfo(title: 'Placa', info: dadosPagamento.placa.toUpperCase()),
+                            SizedBox(height: 15),
+                            ticketinfo(title: 'Tempo', info: '${dadosPagamento.tempo} minutos'),
+                            SizedBox(height: 15),
+                            ticketinfo(title: 'Método de Pagamento', info: dadosPagamento.meioPagamento),
+                            SizedBox(height: 15),
+                            Wrap(
+                              children: const [
+                                Text(
+                                  'David',
+                                  style: TextStyle(
+                                    color: Color(0xFF505050),
+                                    fontFamily: "RobotoMedium",
+                                    fontSize: 25,
+                                  ),
+                                ),
+                                Text(
+                                  'zone',
+                                  style: TextStyle(
+                                    color: Color(0xFF67DFDD),
+                                    fontFamily: "RobotoMedium",
+                                    fontSize: 25,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                                height: 15,
+                                child: Image.asset('assets/cidadao_box.png')),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 HomeButton(),
@@ -52,6 +128,37 @@ class PagamentoRealizado extends StatelessWidget {
     );
   }
 }
+
+class ticketinfo extends StatelessWidget {
+  const ticketinfo({Key? key, required this.title, required this.info}) : super(key: key);
+  final String title;
+  final String info;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      direction: Axis.vertical,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        Text(
+            title,
+          style: TextStyle(
+            fontFamily: 'RobotoRegular',
+            fontSize: 12,
+          ),
+        ),
+        Text(
+          info,
+          style: TextStyle(
+            fontFamily: 'RobotoMedium',
+            fontSize: 24,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 
 class HomeButton extends StatelessWidget {
 
