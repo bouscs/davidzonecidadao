@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:davidzonecidadao/main.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,8 @@ class _PagamentoCartao extends State<PagamentoCartao> {
   final cidadaoInfo;
   _PagamentoCartao(this.valor, this.tempo, this.cidadaoInfo);
 
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference tickets = FirebaseFirestore.instance.collection('tickets');
   String cardNumber = '';
   String expiryDate= '';
   String cardHolderName = '';
@@ -193,6 +196,18 @@ class _PagamentoCartao extends State<PagamentoCartao> {
                                               cvvCode,
                                               'Cartao',
                                           );
+                                          var timeStamp = FieldValue.serverTimestamp();
+                                          await tickets
+                                              .add({
+                                              "placa" : dadosPagamento.placa,
+                                              "cpfCnpj": dadosPagamento.cpfCnpj,
+                                              "meioPagamento": dadosPagamento.meioPagamento,
+                                              "tempo": tempo,
+                                              "Hora da compra": timeStamp
+                                              })
+                                              .then((documentSnapshot) =>
+                                              print("Dados de pagamento guardados com ID: ${documentSnapshot.id}"));
+
                                           setState(() => state = PaymentState.done);
                                           await Future.delayed(
                                               const Duration(milliseconds: 1500));
@@ -253,3 +268,4 @@ class DadosPagamentoCartao {
 
   DadosPagamentoCartao(this.placa, this.cpfCnpj, this.tempo, this.numeroCartao, this.titular, this.validade, this.cvv, this.meioPagamento);
 }
+
