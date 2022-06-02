@@ -206,6 +206,39 @@ class _bottomContainerComprarTicket
                     });
                     if (!_validateId && !_validatePlate) {
                       var cidadaoInfo = CidadaoInfo(_id.text.toString(), _plate.text.toString());
+                      showDialog(context: context, builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Atenção!'),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: [
+                                Text('Confirme sua Placa, Não há reembolso por erro de digitação.'),
+                                SizedBox(height: 15),
+                                Text('Placa: ${cidadaoInfo.plate.toUpperCase()}'),
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Editar')),
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SelecionarTempo(
+                                          cidadaoInfo: cidadaoInfo,
+                                        )),
+                                  );
+                                },
+                                child: Text('Confirmar'))
+                          ],
+                        );
+                      });
+                      /*
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -213,6 +246,7 @@ class _bottomContainerComprarTicket
                               cidadaoInfo: cidadaoInfo,
                             )),
                       );
+                      */
                     }
                   },
                   child: Text(

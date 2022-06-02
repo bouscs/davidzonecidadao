@@ -37,7 +37,7 @@ class _SelecionarMetodoPagamentoState extends State<SelecionarMetodoPagamento> {
             Column(
               children: [
                 upperContainer(
-                  uppertext: cidadaoInfo.id,
+                  uppertext: 'Comprar Ticket',
                   image: SvgPicture.asset('assets/paymentmethod.svg'),
                   imageheight: 137,
                   bottomtext: 'Selecione o método de\npagamento',

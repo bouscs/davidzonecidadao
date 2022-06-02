@@ -230,7 +230,7 @@ class CustomTextBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        width: 150,
+        width: 165,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(17),
