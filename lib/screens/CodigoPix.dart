@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:davidzonecidadao/main.dart';
 import 'package:davidzonecidadao/screens/PagamentoRealizado.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'dart:math';
 
 class CodigoPix extends StatefulWidget {
   const CodigoPix({Key? key, required this.valor, required this.tempo, this.cidadaoInfo}) : super(key: key);
@@ -17,7 +19,6 @@ class CodigoPix extends StatefulWidget {
 
 class _CodigoPixState extends State<CodigoPix> {
   PaymentState state = PaymentState.loading;
-  String codigo = 'shhdp7ATDGDYihgyasgd6GY\nDAS5189AS645x94da54956';
 
   final double valor;
   final int tempo;
@@ -28,6 +29,12 @@ class _CodigoPixState extends State<CodigoPix> {
   Widget build(BuildContext context) {
     final isDone = state == PaymentState.done;
     final color = isDone ? Colors.green : const Color(0xFF505050);
+    String generateRandomString(int len) {
+      var r = Random();
+      const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+      return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
+    };
+    String codigo = generateRandomString(42);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56),
@@ -38,11 +45,61 @@ class _CodigoPixState extends State<CodigoPix> {
             const MarbleBackground(),
             Column(
               children: [
-                upperContainer(
-                  uppertext: 'Comprar Ticket',
-                  image: SvgPicture.asset('assets/qrcode.svg'),
-                  imageheight: 200,
-                  bottomtext: 'Pagamento Pix',
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 10,
+                          spreadRadius: 2,
+                          offset: const Offset(0,4),
+                        )]
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                    child: Wrap(
+                      direction: Axis.vertical,
+                      runAlignment: WrapAlignment.center,
+                      spacing: 20,
+                      children: <Widget>[
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Text(
+                            'Comprar Ticket',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontFamily: "RobotoMedium",
+                              fontSize: 16,
+                              color: Color(0xFF505050),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 180,
+                          alignment: Alignment.center,
+                          child: QrImage(
+                            data: codigo,
+                            gapless: true,
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: Text(
+                            'Pagamento Pix',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontFamily: "RobotoMedium",
+                                fontSize: 22,
+                                color: Color(0xFF505050)
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only( top: 30 ),
@@ -63,17 +120,13 @@ class _CodigoPixState extends State<CodigoPix> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(12),
-                      child: Column(
-                        children: [
-                          Text(
-                            codigo,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontFamily: 'RobotoRegular',
-                              color: Color(0xFF323232),
-                            ),
-                          ),
-                        ],
+                      child: Text(
+                        codigo,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'RobotoRegular',
+                          color: Color(0xFF323232),
+                        ),
                       ),
                     ),
                   ),
