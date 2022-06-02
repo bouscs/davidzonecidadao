@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +26,9 @@ class _CodigoPixState extends State<CodigoPix> {
   final int tempo;
   final cidadaoInfo;
   _CodigoPixState(this.valor, this.tempo, this.cidadaoInfo);
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference tickets = FirebaseFirestore.instance.collection('tickets');
 
   @override
   Widget build(BuildContext context) {
@@ -234,6 +239,18 @@ class _CodigoPixState extends State<CodigoPix> {
                                   cidadaoInfo.id,
                                   tempo,
                                   'Pix');
+
+                              var timeStamp = FieldValue.serverTimestamp();
+                              await tickets
+                                  .add({
+                                  "placa" : dadosPagamento.placa,
+                                  "cpfCnpj": dadosPagamento.cpfCnpj,
+                                  "meioPagamento": dadosPagamento.meioPagamento,
+                                  "tempo": tempo,
+                                  "Hora da compra": timeStamp,
+                                  })
+                                  .then((documentSnapshot) =>
+                                  print("Dados de pagamento guardados com ID: ${documentSnapshot.id}"));
                               setState(() => state = PaymentState.done);
                               await Future.delayed(const Duration(milliseconds: 1500));
                               Navigator.push( context, MaterialPageRoute(builder: (context) => PagamentoRealizado(
