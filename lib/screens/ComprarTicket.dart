@@ -58,42 +58,60 @@ class _bottomContainerComprarTicket
     super.dispose();
   }
 
-  int verifyPlate(String plate) {
+  bool verifyPlate(String plate) {
     const letters = 3;
     const nums = 4;
 
     plate = plate.toUpperCase();
     // Check the length
     if (plate.length != (letters + nums)) {
-      return 1;
+      return false;
     }
     // Check the letters
     for (int l = 0; l < letters; l++) {
       if (!plate[l].contains(new RegExp(r'[A-Z]'))) {
-        return 2;
+        return false;
       }
     }
     // Check the numbers
     for (int n = letters; n < (letters + nums); n++) {
       if (!plate[n].contains(new RegExp(r'[0-9]'))) {
-        return 3;
+        return false;
       }
     }
-    return 0;
+    return true;
   }
 
-  String getPlateMessage(int plateCode) {
-    late String message;
+  bool verifyMercosulPlate(String plate) {
+    const letters = 4;
+    const nums = 3;
 
-    if (plateCode == 1) {
-      message = "A placa deve conter 7 dígitos";
-    } else if (plateCode == 2) {
-      message = "A placa deve começar com 3 letras em sequencia";
-    } else if (plateCode == 3) {
-      message = "A placa deve terminar com 4 numeros em sequencia";
+    plate = plate.toUpperCase();
+
+    if (plate.length != (letters + nums)) {
+      return false;
     }
 
-    return message;
+    for (int l = 0; l < 3; l++) {
+      if (!plate[l].contains(new RegExp(r'[A-Z]'))) {
+        return false;
+      }
+    }
+
+    if (!plate[3].contains(new RegExp(r'[0-9]'))) {
+      return false;
+    }
+
+    if (!plate[4].contains(new RegExp(r'[A-Z]'))) {
+      return false;
+    }
+
+    for (int n = 5; n < 7; n++) {
+      if (!plate[n].contains(new RegExp(r'[0-9]'))) {
+        return false;
+      }
+    }
+    return true;
   }
 
   int verifyId(String id) {
@@ -149,9 +167,7 @@ class _bottomContainerComprarTicket
                 border: OutlineInputBorder(),
                 labelText: 'Placa',
                 hintText: 'ABC1234',
-                errorText: _validatePlate
-                    ? getPlateMessage(verifyPlate(_plate.text.toString()))
-                    : null,
+                errorText: _validatePlate ? "Digite uma placa válida" : null,
               ),
             ),
             SizedBox(
@@ -200,44 +216,51 @@ class _bottomContainerComprarTicket
                       verifyId(_id.text.toString()) != 0
                           ? _validateId = true
                           : _validateId = false;
-                      verifyPlate(_plate.text.toString()) != 0
+                      verifyPlate(_id.text.toString()) ||
+                              verifyMercosulPlate(_id.text.toString()) == true
                           ? _validatePlate = true
                           : _validatePlate = false;
                     });
                     if (!_validateId && !_validatePlate) {
-                      var cidadaoInfo = CidadaoInfo(_id.text.toString(), _plate.text.toString());
-                      showDialog(context: context, builder: (BuildContext context){
-                        return AlertDialog(
-                          title: Text('Atenção!'),
-                          content: SingleChildScrollView(
-                            child: ListBody(
-                              children: [
-                                Text('Confirme sua Placa, Não há reembolso por erro de digitação.'),
-                                SizedBox(height: 15),
-                                Text('Placa: ${cidadaoInfo.plate.toUpperCase()}'),
+                      var cidadaoInfo = CidadaoInfo(
+                          _id.text.toString(), _plate.text.toString());
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Atenção!'),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: [
+                                    Text(
+                                        'Confirme sua Placa, Não há reembolso por erro de digitação.'),
+                                    SizedBox(height: 15),
+                                    Text(
+                                        'Placa: ${cidadaoInfo.plate.toUpperCase()}'),
+                                  ],
+                                ),
+                              ),
+                              actions: [
+                                FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Editar')),
+                                FlatButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SelecionarTempo(
+                                                  cidadaoInfo: cidadaoInfo,
+                                                )),
+                                      );
+                                    },
+                                    child: Text('Confirmar'))
                               ],
-                            ),
-                          ),
-                          actions: [
-                            FlatButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text('Editar')),
-                            FlatButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SelecionarTempo(
-                                          cidadaoInfo: cidadaoInfo,
-                                        )),
-                                  );
-                                },
-                                child: Text('Confirmar'))
-                          ],
-                        );
-                      });
+                            );
+                          });
                       /*
                       Navigator.push(
                         context,
