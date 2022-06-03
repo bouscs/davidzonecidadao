@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:davidzonecidadao/main.dart';
+import 'package:intl/intl.dart';
 
 class PagamentoRealizado extends StatelessWidget {
   const PagamentoRealizado({Key? key, this.dadosPagamento}) : super(key: key);
@@ -61,7 +62,7 @@ class PagamentoRealizado extends StatelessWidget {
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width/1.4,
-                      height: MediaQuery.of(context).size.height/3,
+                      height: MediaQuery.of(context).size.height/2.5,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -87,6 +88,8 @@ class PagamentoRealizado extends StatelessWidget {
                             ticketinfo(title: 'Placa', info: dadosPagamento.placa.toUpperCase()),
                             SizedBox(height: 15),
                             ticketinfo(title: 'Tempo', info: '${dadosPagamento.tempo} minutos'),
+                            SizedBox(height: 15),
+                            ticketinfo(title: 'Valido até', info: DateFormat('kk:mm - dd/MM/yy').format(dadosPagamento.horaTermino)),
                             SizedBox(height: 15),
                             ticketinfo(title: 'Método de Pagamento', info: dadosPagamento.meioPagamento),
                             SizedBox(height: 15),

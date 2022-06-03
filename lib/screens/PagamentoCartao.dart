@@ -186,6 +186,8 @@ class _PagamentoCartao extends State<PagamentoCartao> {
                                     child: FlatButton(
                                       onPressed: () async {
                                         if (formKey.currentState!.validate()) {
+                                          var datetime = DateTime.now();
+                                          var validade = datetime.add(Duration(minutes: tempo));
                                           var dadosPagamento = DadosPagamentoCartao(
                                               cidadaoInfo.plate,
                                               cidadaoInfo.id,
@@ -195,6 +197,8 @@ class _PagamentoCartao extends State<PagamentoCartao> {
                                               expiryDate,
                                               cvvCode,
                                               'Cartao',
+                                              datetime,
+                                              validade,
                                           );
                                           var timeStamp = FieldValue.serverTimestamp();
                                           await tickets
@@ -203,7 +207,8 @@ class _PagamentoCartao extends State<PagamentoCartao> {
                                               "cpfCnpj": dadosPagamento.cpfCnpj,
                                               "meioPagamento": dadosPagamento.meioPagamento,
                                               "tempo": tempo,
-                                              "Hora da compra": timeStamp
+                                              "Hora da compra": timeStamp,
+                                              "Validade": validade
                                               })
                                               .then((documentSnapshot) =>
                                               print("Dados de pagamento guardados com ID: ${documentSnapshot.id}"));
@@ -265,7 +270,19 @@ class DadosPagamentoCartao {
   String validade;
   String cvv;
   String meioPagamento;
+  DateTime horaPagamento;
+  DateTime horaTermino;
 
-  DadosPagamentoCartao(this.placa, this.cpfCnpj, this.tempo, this.numeroCartao, this.titular, this.validade, this.cvv, this.meioPagamento);
+  DadosPagamentoCartao(
+      this.placa,
+      this.cpfCnpj,
+      this.tempo,
+      this.numeroCartao,
+      this.titular,
+      this.validade,
+      this.cvv,
+      this.meioPagamento,
+      this.horaPagamento,
+      this.horaTermino);
 }
 
