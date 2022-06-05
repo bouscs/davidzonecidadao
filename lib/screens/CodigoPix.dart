@@ -16,13 +16,24 @@ class CodigoPix extends StatefulWidget {
   final int tempo;
   final cidadaoInfo;
 
+
   @override
   State<CodigoPix> createState() => _CodigoPixState( valor, tempo, cidadaoInfo);
 }
 
 class _CodigoPixState extends State<CodigoPix> {
+  String generateRandomString() {
+    var r = Random();
+    const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    return List.generate(42, (index) => _chars[r.nextInt(_chars.length)]).join();
+  }
+  String codigo = '0';
+  @override
+  void initState(){
+    super.initState();
+    codigo = generateRandomString();
+  }
   PaymentState state = PaymentState.loading;
-
   final double valor;
   final int tempo;
   final cidadaoInfo;
@@ -35,12 +46,6 @@ class _CodigoPixState extends State<CodigoPix> {
   Widget build(BuildContext context) {
     final isDone = state == PaymentState.done;
     final color = isDone ? Colors.green : const Color(0xFF505050);
-    String generateRandomString(int len) {
-      var r = Random();
-      const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-      return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
-    };
-    String codigo = generateRandomString(42);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56),
@@ -266,7 +271,7 @@ class _CodigoPixState extends State<CodigoPix> {
                               )),);
                             },
                             child: const Text(
-                              'Simular Pagamento',
+                              'Pagar',
                               style: TextStyle(
                                 fontFamily: 'RobotoBold',
                                 fontSize: 16,
