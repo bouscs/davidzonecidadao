@@ -48,55 +48,20 @@ class bottomContainerConsultarTicket extends StatefulWidget {
 class _bottomContainerConsultarTicket
     extends State<bottomContainerConsultarTicket> {
 
+  int verify = 0;
+  Future getTickets(placa) async {
+    await FirebaseFirestore.instance.collection('tickets')
+        .where("placa", isEqualTo: placa)
+        .get().then(
+            (snapshot) => snapshot.docs.forEach((document) {
+          verify = 1;
+        }));
+  }
+
   final _plate = TextEditingController();
   final _id = TextEditingController();
   bool _validateId = false;
   bool _validatePlate = false;
-
-  List<String> tickets = [];
-  Future getTickets( placa, id) async {
-    await FirebaseFirestore.instance.collection('tickets')
-        .where("cpfCnpj", isEqualTo: id)
-        .where("placa", isEqualTo: placa)
-        .get().then(
-            (snapshot) => snapshot.docs.forEach((document) {
-          tickets.add(document.get("tempo").toString());
-        }));
-    if (tickets.length == 0) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Atenção!'),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: [
-                    Text(
-                        'Nenhum ticket encontrado para o veículo informado'),
-                  ],
-                ),
-              ),
-              actions: [
-                FlatButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Ok')),
-              ],
-            );
-          });
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                HistoricoTickets(
-                  cpfCnpj: id.text.toString(),
-                  placa: placa.text.toString(),
-                )),
-      );
-    }
-  }
 
   @override
   void dispose() {
@@ -269,15 +234,41 @@ class _bottomContainerConsultarTicket
                           : _validatePlate = false;
                     });
                     if (!_validateId && !_validatePlate) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                HistoricoTickets(
-                                  cpfCnpj: _id.text.toString(),
-                                  placa: _plate.text.toString(),
-                                )),
-                      );
+                      await getTickets(_plate.text);
+                      if (verify == 1) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HistoricoTickets(
+                                    cpfCnpj: _id.text.toString(),
+                                    placa: _plate.text.toString(),
+                                  )),
+                        );
+                        verify = 0;
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Atenção!'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: [
+                                      Text(
+                                          'Nenhum ticket encontrado.'),
+                                    ],
+                                  ),
+                                ),
+                                actions: [
+                                  FlatButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('Ok')),
+                                ],
+                              );
+                            });
+                      }
                     }
                   },
                   child: Text(

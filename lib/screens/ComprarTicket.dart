@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:davidzonecidadao/main.dart';
@@ -45,6 +46,16 @@ class bottomContainerComprarTicket extends StatefulWidget {
 class _bottomContainerComprarTicket
     extends State<bottomContainerComprarTicket> {
   // const bottomContainerComprarTicket({Key? key}) : super(key: key);
+
+  int verify = 0;
+  Future getVeiculos(placa) async {
+    await FirebaseFirestore.instance.collection('veiculos')
+        .where("placa", isEqualTo: placa)
+        .get().then(
+            (snapshot) => snapshot.docs.forEach((document) {
+          verify = 1;
+        }));
+  }
 
   final _plate = TextEditingController();
   final _id = TextEditingController();
@@ -211,7 +222,7 @@ class _bottomContainerComprarTicket
                   ],
                 ),
                 child: FlatButton(
-                  onPressed: () {
+                  onPressed: () async {
                     setState(() {
                       verifyId(_id.text.toString()) != 0
                           ? _validateId = true
@@ -222,45 +233,72 @@ class _bottomContainerComprarTicket
                           : _validatePlate = false;
                     });
                     if (!_validateId && !_validatePlate) {
-                      var cidadaoInfo = CidadaoInfo(
-                          _id.text.toString(), _plate.text.toString());
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Atenção!'),
-                              content: SingleChildScrollView(
-                                child: ListBody(
-                                  children: [
-                                    Text(
-                                        'Confirme sua Placa, Não há reembolso por erro de digitação.'),
-                                    SizedBox(height: 15),
-                                    Text(
-                                        'Placa: ${cidadaoInfo.plate.toUpperCase()}'),
-                                  ],
+                      await getVeiculos(_plate.text);
+                      if (verify==1) {
+                        var cidadaoInfo = CidadaoInfo(
+                            _id.text.toString(), _plate.text.toString());
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Atenção!'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: [
+                                      Text(
+                                          'Confirme sua Placa, Não há reembolso por erro de digitação.'),
+                                      SizedBox(height: 15),
+                                      Text(
+                                          'Placa: ${cidadaoInfo.plate.toUpperCase()}'),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              actions: [
-                                FlatButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Editar')),
-                                FlatButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SelecionarTempo(
-                                                  cidadaoInfo: cidadaoInfo,
-                                                )),
-                                      );
-                                    },
-                                    child: Text('Confirmar'))
-                              ],
-                            );
-                          });
+                                actions: [
+                                  FlatButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('Editar')),
+                                  FlatButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SelecionarTempo(
+                                                    cidadaoInfo: cidadaoInfo,
+                                                  )),
+                                        );
+                                      },
+                                      child: Text('Confirmar'))
+                                ],
+                              );
+                            });
+                        verify = 0;
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Atenção!'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: [
+                                      Text('Veiculo não encontrado na base de dados'),
+                                    ],
+                                  ),
+                                ),
+                                actions: [
+                                  FlatButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('Ok')),
+                                ],
+                              );
+                            });
+                      }
+
                       /*
                       Navigator.push(
                         context,

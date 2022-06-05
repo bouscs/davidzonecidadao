@@ -61,7 +61,7 @@ class _HistoricoTicketsState extends State<HistoricoTickets> {
                 if (tempo.length == 0) {
                   return Center(
                       child: Text(
-                          'Nenhum ticket encontrado.',
+                          'Carregando...',
                         style: TextStyle(
                           fontFamily: 'RobotoMedium',
                           fontSize: 25,

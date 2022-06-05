@@ -237,6 +237,7 @@ class MarbleBackground extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: const AssetImage('assets/marblebg.jpg'),
+          fit: BoxFit.fitWidth,
           colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.4), BlendMode.modulate)
         )
       ),
