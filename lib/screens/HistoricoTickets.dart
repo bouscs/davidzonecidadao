@@ -28,10 +28,10 @@ class _HistoricoTicketsState extends State<HistoricoTickets> {
         .get().then(
             (snapshot) => snapshot.docs.forEach((document) {
               tempo.add(document.get("tempo").toString());
-              validade.add(DateFormat('dd/MM/yy - kk:mm').format(document.get("Validade").toDate()));
+              validade.add(DateFormat('dd/MM/yy - kk:mm').format(document.get("termino").toDate()));
               meioPagamento.add(document.get("meioPagamento").toString());
               placaTicket.add(document.get("placa").toString());
-              validadestamp.add(document.get("Validade"));
+              validadestamp.add(document.get("termino"));
             }));
   }
 
@@ -156,13 +156,45 @@ class TicketState extends StatelessWidget {
 
   getState () {
     if (validade.compareTo(Timestamp.now())>0) {
-      return Text('VÁLIDO', style: TextStyle(
-          color: Colors.white, fontSize: 20, fontFamily: 'RobotoBold'
-      ),);
+      return Wrap(
+        direction: Axis.horizontal,
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          Container(
+            width: 15,
+            height: 15,
+            decoration: BoxDecoration(
+              color: Colors.green,
+              shape: BoxShape.circle,
+            ),
+          ),
+          SizedBox(width: 5),
+          Text('VÁLIDO', style: TextStyle(
+              color: Colors.white, fontSize: 20, fontFamily: 'RobotoBold'
+          ),),
+        ],
+      );
     }
-    return Text('EXPIRADO', style: TextStyle(
-        color: Colors.white, fontSize: 20, fontFamily: 'RobotoBold'
-    ),);
+    return Wrap(
+      direction: Axis.horizontal,
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        Container(
+          width: 15,
+          height: 15,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            shape: BoxShape.circle,
+          ),
+        ),
+        SizedBox(width: 5),
+        Text('EXPIRADO', style: TextStyle(
+            color: Colors.white, fontSize: 20, fontFamily: 'RobotoBold'
+        ),),
+      ],
+    );
   }
 
   @override

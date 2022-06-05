@@ -249,12 +249,13 @@ class _CodigoPixState extends State<CodigoPix> {
                               var timeStamp = FieldValue.serverTimestamp();
                               await tickets
                                   .add({
-                                  "placa" : dadosPagamento.placa,
+                                  "placa" : dadosPagamento.placa.toLowerCase(),
                                   "cpfCnpj": dadosPagamento.cpfCnpj,
                                   "meioPagamento": dadosPagamento.meioPagamento,
                                   "tempo": tempo,
-                                  "Hora da compra": timeStamp,
-                                  "Validade": validade,
+                                  "inicio": timeStamp,
+                                  "termino": validade,
+                                  "tipo": 'carro',
                                   })
                                   .then((documentSnapshot) =>
                                   print("Dados de pagamento guardados com ID: ${documentSnapshot.id}"));
