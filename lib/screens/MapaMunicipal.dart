@@ -46,7 +46,7 @@ class _MapaMunicipal extends State<MapaMunicipal> {
 
   initilize() {
     int i = 0;
-    Marker firstMarker = Marker(
+    Marker oneMarker = Marker(
       markerId: MarkerId('davidgas'),
       position: LatLng(-22.922795035713108, -47.0600505551868),
       infoWindow: InfoWindow(
@@ -56,7 +56,7 @@ class _MapaMunicipal extends State<MapaMunicipal> {
         BitmapDescriptor.hueRed,
       ),
     );
-    Marker secoundMarker = Marker(
+    Marker twoMarker = Marker(
       markerId: MarkerId('daviduniversity'),
       position: LatLng(-22.83434768818629, -47.05089004881388),
       infoWindow: InfoWindow(
@@ -66,7 +66,7 @@ class _MapaMunicipal extends State<MapaMunicipal> {
         BitmapDescriptor.hueRed,
       ),
     );
-    Marker thirdMarker = Marker(
+    Marker threeMarker = Marker(
       markerId: MarkerId('davidbread'),
       position: LatLng(-22.9260127049913, -47.07022138755717),
       infoWindow: InfoWindow(
@@ -76,8 +76,38 @@ class _MapaMunicipal extends State<MapaMunicipal> {
         BitmapDescriptor.hueRed,
       ),
     );
+    Marker fourMarker = Marker(
+      markerId: MarkerId('davidcenter'),
+      position: LatLng(-22.8952342, -47.0632546),
+      infoWindow: InfoWindow(
+          title: 'Shopping David Center',
+          snippet: 'Comprar ticket em dinheiro em horário comercial'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueRed,
+      ),
+    );
+    Marker fiveMarker = Marker(
+      markerId: MarkerId('david gym'),
+      position: LatLng(-22.894672, -47.057845),
+      infoWindow: InfoWindow(
+          title: 'David Gym',
+          snippet: 'Comprar ticket em dinheiro em horário comercial'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueRed,
+      ),
+    );
+    Marker sixMarker = Marker(
+      markerId: MarkerId('davidramen'),
+      position: LatLng(-22.8925034, -47.0540452),
+      infoWindow: InfoWindow(
+          title: 'Restaurante David Ramen',
+          snippet: 'Comprar ticket em dinheiro em horário comercial'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueRed,
+      ),
+    );
 
-    Polygon firstPolygon = Polygon(
+    Polygon onePolygon = Polygon(
         polygonId: PolygonId((i++).toString()),
         fillColor: Colors.blueAccent.withOpacity(0.3),
         strokeColor: Colors.blueAccent,
@@ -88,7 +118,7 @@ class _MapaMunicipal extends State<MapaMunicipal> {
           LatLng(-22.924362, -47.058423),
           LatLng(-22.922571, -47.058265),
         ]);
-    Polygon secoundPolygon = Polygon(
+    Polygon twoPolygon = Polygon(
         polygonId: PolygonId((i++).toString()),
         fillColor: Colors.blueAccent.withOpacity(0.3),
         strokeColor: Colors.blueAccent,
@@ -99,7 +129,7 @@ class _MapaMunicipal extends State<MapaMunicipal> {
           LatLng(-22.8366351, -47.0488115),
           LatLng(-22.8315469, -47.0497846),
         ]);
-    Polygon thirdPolygon = Polygon(
+    Polygon threePolygon = Polygon(
         polygonId: PolygonId((i++).toString()),
         fillColor: Colors.blueAccent.withOpacity(0.3),
         strokeColor: Colors.blueAccent,
@@ -110,13 +140,55 @@ class _MapaMunicipal extends State<MapaMunicipal> {
           LatLng(-22.925160, -47.070100),
           LatLng(-22.925825, -47.069456),
         ]);
-    markers.add(firstMarker);
-    markers.add(secoundMarker);
-    markers.add(thirdMarker);
+    Polygon fourPolygon = Polygon(
+        polygonId: PolygonId((i++).toString()),
+        fillColor: Colors.blueAccent.withOpacity(0.3),
+        strokeColor: Colors.blueAccent,
+        strokeWidth: 3,
+        points: const <LatLng>[
+          LatLng(-22.894855, -47.066085),
+          LatLng(-22.893027, -47.064482),
+          LatLng(-22.895093, -47.061600),
+          LatLng(-22.897310,
+              -47.062624), // (in case shit happens: -22.896965, -47.063159)
+        ]);
+    Polygon fivePolygon = Polygon(
+        polygonId: PolygonId((i++).toString()),
+        fillColor: Colors.blueAccent.withOpacity(0.3),
+        strokeColor: Colors.blueAccent,
+        strokeWidth: 3,
+        points: const <LatLng>[
+          LatLng(-22.893803, -47.060337),
+          LatLng(-22.895374, -47.059413),
+          LatLng(-22.895990, -47.056971),
+          LatLng(-22.894877, -47.054850),
+        ]);
+    Polygon sixPolygon = Polygon(
+        polygonId: PolygonId((i++).toString()),
+        fillColor: Colors.blueAccent.withOpacity(0.3),
+        strokeColor: Colors.blueAccent,
+        strokeWidth: 3,
+        points: const <LatLng>[
+          LatLng(-22.891657, -47.055455),
+          LatLng(-22.893112, -47.055586),
+          LatLng(-22.893601, -47.049526),
+          LatLng(-22.891987, -47.048232),
+        ]);
 
-    polygons.add(firstPolygon);
-    polygons.add(secoundPolygon);
-    polygons.add(thirdPolygon);
+    markers.add(oneMarker);
+    markers.add(twoMarker);
+    markers.add(threeMarker);
+    markers.add(fourMarker);
+    markers.add(fiveMarker);
+    markers.add(sixMarker);
+
+    polygons.add(onePolygon);
+    polygons.add(twoPolygon);
+    polygons.add(threePolygon);
+    polygons.add(fourPolygon);
+    polygons.add(fivePolygon);
+    polygons.add(sixPolygon);
+
     setState(() {});
   }
 
