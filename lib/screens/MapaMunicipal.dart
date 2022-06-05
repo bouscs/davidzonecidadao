@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:davidzonecidadao/main.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
@@ -18,11 +19,23 @@ class _MapaMunicipal extends State<MapaMunicipal> {
   LatLng _initialcameraposition =
       LatLng(-22.906546036007246, -47.04614884200783);
   late GoogleMapController _controller;
-
   // MapaMunicipal({Key? key}) : super(key: key);
 
   void _onMapCreated(GoogleMapController _cntlr) {
     _controller = _cntlr;
+    changeMapMode();
+  }
+
+  changeMapMode() {
+    getJsonFile("assets/mapstyle.json").then(setMapStyle);
+  }
+
+  Future<String> getJsonFile(String path) async {
+    return await rootBundle.loadString(path);
+  }
+
+  void setMapStyle(String mapStyle) {
+    _controller.setMapStyle(mapStyle);
   }
 
   @override
