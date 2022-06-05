@@ -24,7 +24,7 @@ class ConsultarTicket extends StatelessWidget {
               children: [
                 upperContainer(
                   uppertext: 'Consultar Ticket',
-                  image: SvgPicture.asset('assets/car_art.svg'),
+                  image: SvgPicture.asset('assets/search.svg'),
                   imageheight: 137,
                   bottomtext: 'Verifique seus últimos\ntickets',
                 ),
@@ -52,6 +52,51 @@ class _bottomContainerConsultarTicket
   final _id = TextEditingController();
   bool _validateId = false;
   bool _validatePlate = false;
+
+  List<String> tickets = [];
+  Future getTickets( placa, id) async {
+    await FirebaseFirestore.instance.collection('tickets')
+        .where("cpfCnpj", isEqualTo: id)
+        .where("placa", isEqualTo: placa)
+        .get().then(
+            (snapshot) => snapshot.docs.forEach((document) {
+          tickets.add(document.get("tempo").toString());
+        }));
+    if (tickets.length == 0) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Atenção!'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    Text(
+                        'Nenhum ticket encontrado para o veículo informado'),
+                  ],
+                ),
+              ),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Ok')),
+              ],
+            );
+          });
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                HistoricoTickets(
+                  cpfCnpj: id.text.toString(),
+                  placa: placa.text.toString(),
+                )),
+      );
+    }
+  }
 
   @override
   void dispose() {
@@ -213,7 +258,7 @@ class _bottomContainerConsultarTicket
                   ],
                 ),
                 child: FlatButton(
-                  onPressed: () {
+                  onPressed: ()  async {
                     setState(() {
                       verifyId(_id.text.toString()) != 0
                           ? _validateId = true
@@ -227,10 +272,11 @@ class _bottomContainerConsultarTicket
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => HistoricoTickets(
-                              cpfCnpj: _id.text.toString(),
-                              placa: _plate.text.toString(),
-                            )),
+                            builder: (context) =>
+                                HistoricoTickets(
+                                  cpfCnpj: _id.text.toString(),
+                                  placa: _plate.text.toString(),
+                                )),
                       );
                     }
                   },
@@ -251,3 +297,4 @@ class _bottomContainerConsultarTicket
     );
   }
 }
+

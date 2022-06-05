@@ -97,6 +97,7 @@ flutter:
     - assets/paymentmethod.svg
     - assets/cidadao_box.png
     - assets/loadingcircles.json
+    - assets/search.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

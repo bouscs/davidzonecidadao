@@ -58,6 +58,16 @@ class _HistoricoTicketsState extends State<HistoricoTickets> {
                 List<String> reversemeioPagamento = meioPagamento.reversed.toList();
                 List<String> reverseplacaTicket = placaTicket.reversed.toList();
                 List<Timestamp> reversevalidadestamp = validadestamp.reversed.toList();
+                if (tempo.length == 0) {
+                  return Center(
+                      child: Text(
+                          'Nenhum ticket encontrado.',
+                        style: TextStyle(
+                          fontFamily: 'RobotoMedium',
+                          fontSize: 25,
+                        ),
+                      ));
+                }
                 return ListView.builder(
                     itemCount: tempo.length,
                     itemBuilder: (context, index) {
