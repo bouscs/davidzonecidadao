@@ -219,7 +219,7 @@ class bottomContainer extends StatelessWidget {
               //height: MediaQuery.of(context).size.height/2.5,
             //),
             CustomButton(text: 'Comprar Ticket', screen: ComprarTicket(), validation: 1,),
-            //CustomButton(text: 'Consultar Ticket', screen: ConsultarTicket(), validation: 1,),
+            CustomButton(text: 'Histórico', screen: ConsultarTicket(), validation: 1,),
             CustomButton(text: 'Mapa Municipal', screen: MapaMunicipal(), validation: 1,),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -234,11 +235,16 @@ class _CodigoPixState extends State<CodigoPix> {
                           ),
                           child: FlatButton(
                             onPressed: () async {
+                              var datetime = DateTime.now();
+                              var validade = datetime.add(Duration(minutes: tempo));
                               var dadosPagamento = DadosPagamentoPix(
                                   cidadaoInfo.plate,
                                   cidadaoInfo.id,
                                   tempo,
-                                  'Pix');
+                                  'Pix',
+                                  datetime,
+                                  validade,
+                              );
 
                               var timeStamp = FieldValue.serverTimestamp();
                               await tickets
@@ -248,6 +254,7 @@ class _CodigoPixState extends State<CodigoPix> {
                                   "meioPagamento": dadosPagamento.meioPagamento,
                                   "tempo": tempo,
                                   "Hora da compra": timeStamp,
+                                  "Validade": validade,
                                   })
                                   .then((documentSnapshot) =>
                                   print("Dados de pagamento guardados com ID: ${documentSnapshot.id}"));
@@ -283,7 +290,9 @@ class DadosPagamentoPix{
   String cpfCnpj;
   int tempo;
   String meioPagamento;
-  DadosPagamentoPix(this.placa, this.cpfCnpj, this.tempo, this.meioPagamento);
+  DateTime horaPagamento;
+  DateTime horaTermino;
+  DadosPagamentoPix(this.placa, this.cpfCnpj, this.tempo, this.meioPagamento, this.horaPagamento, this.horaTermino);
 }
 
 enum PaymentState { loading, done }
