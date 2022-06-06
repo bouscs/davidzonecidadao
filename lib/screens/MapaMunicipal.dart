@@ -106,6 +106,36 @@ class _MapaMunicipal extends State<MapaMunicipal> {
         BitmapDescriptor.hueRed,
       ),
     );
+    Marker sevenMarker = Marker(
+      markerId: MarkerId('davidfestas'),
+      position: LatLng(-22.892649, -47.078597),
+      infoWindow: InfoWindow(
+          title: 'David Festas',
+          snippet: 'Comprar ticket em dinheiro em horário comercial'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueRed,
+      ),
+    );
+    Marker eightMarker = Marker(
+      markerId: MarkerId('davidpark'),
+      position: LatLng(-22.891664, -47.094116),
+      infoWindow: InfoWindow(
+          title: 'David Parque',
+          snippet: 'Comprar ticket em dinheiro em horário comercial'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueRed,
+      ),
+    );
+    Marker nineMarker = Marker(
+      markerId: MarkerId('davidcomputa'),
+      position: LatLng(-22.879648, -47.060807),
+      infoWindow: InfoWindow(
+          title: 'David Computer',
+          snippet: 'Comprar ticket em dinheiro em horário comercial'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueRed,
+      ),
+    );
 
     Polygon onePolygon = Polygon(
         polygonId: PolygonId((i++).toString()),
@@ -174,6 +204,39 @@ class _MapaMunicipal extends State<MapaMunicipal> {
           LatLng(-22.893601, -47.049526),
           LatLng(-22.891987, -47.048232),
         ]);
+    Polygon sevenPolygon = Polygon(
+        polygonId: PolygonId((i++).toString()),
+        fillColor: Colors.blueAccent.withOpacity(0.3),
+        strokeColor: Colors.blueAccent,
+        strokeWidth: 3,
+        points: const <LatLng>[
+          LatLng(-22.891352, -47.079996),
+          LatLng(-22.893666, -47.078871),
+          LatLng(-22.893148, -47.075205),
+          LatLng(-22.891454, -47.076172),
+        ]);
+    Polygon eightPolygon = Polygon(
+        polygonId: PolygonId((i++).toString()),
+        fillColor: Colors.blueAccent.withOpacity(0.3),
+        strokeColor: Colors.blueAccent,
+        strokeWidth: 3,
+        points: const <LatLng>[
+          LatLng(-22.892687, -47.094201),
+          LatLng(-22.889971, -47.096016),
+          LatLng(-22.889348, -47.094992),
+          LatLng(-22.891861, -47.093039),
+        ]);
+    Polygon ninePolygon = Polygon(
+        polygonId: PolygonId((i++).toString()),
+        fillColor: Colors.blueAccent.withOpacity(0.3),
+        strokeColor: Colors.blueAccent,
+        strokeWidth: 3,
+        points: const <LatLng>[
+          LatLng(-22.879911, -47.062646),
+          LatLng(-22.878115, -47.058986),
+          LatLng(-22.879005, -47.058911),
+          LatLng(-22.880724, -47.062387),
+        ]);
 
     markers.add(oneMarker);
     markers.add(twoMarker);
@@ -181,6 +244,9 @@ class _MapaMunicipal extends State<MapaMunicipal> {
     markers.add(fourMarker);
     markers.add(fiveMarker);
     markers.add(sixMarker);
+    markers.add(sevenMarker);
+    markers.add(eightMarker);
+    markers.add(nineMarker);
 
     polygons.add(onePolygon);
     polygons.add(twoPolygon);
@@ -188,6 +254,9 @@ class _MapaMunicipal extends State<MapaMunicipal> {
     polygons.add(fourPolygon);
     polygons.add(fivePolygon);
     polygons.add(sixPolygon);
+    polygons.add(sevenPolygon);
+    polygons.add(eightPolygon);
+    polygons.add(ninePolygon);
 
     setState(() {});
   }
